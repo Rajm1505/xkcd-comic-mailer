@@ -1,0 +1,37 @@
+body{
+    background-color: black;
+}
+h2, label, p, button{
+    color :white;
+    font-family: 'Montserrat', sans-serif
+}
+input{
+    color: black;
+    font-family: 'Montserrat', sans-serif
+}
+
+.container{
+    display: flex;
+    margin:0 auto;
+    margin-top: 10%;
+    margin-bottom: 10%;
+    width: 25%;
+    border: 1px solid yellow;
+    padding: 22px;
+    border-radius: 22px;
+}
+h2{
+    text-align: center;
+}
+
+.form-control{
+    margin-bottom: 10px;
+}
+#BtnSubscribe{
+    color: white;
+    background-color: red;
+    padding: 5px;
+}
+input{
+    
+}
