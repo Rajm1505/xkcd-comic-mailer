@@ -1,7 +1,9 @@
 <?php
 session_start();
-$msg = isset($_SESSION["message"])?$_SESSION["message"]:"";
-unset($_SESSION["message"]);
+$emsg = isset($_SESSION["errormessage"])?$_SESSION["errormessage"]:"";
+$smsg = isset($_SESSION["successmessage"])?$_SESSION["successmessage"]:"";
+unset($_SESSION["errormessage"]);
+unset($_SESSION["successmessage"]);
 ?>
 
 <!DOCTYPE html>
@@ -18,17 +20,18 @@ unset($_SESSION["message"]);
 </head>
 <body>
     <div class="container">
-        <form action="#" method="get" id="mailform">
+        <form action="#" method="get" id="subscriptionform">
             <h2>Subscribe to Comics</h2>
-            <p id="errormsg"><?= $msg ?></p>
+            <p id="errormsg"><?= $emsg ?></p>
+            <p id="successmsg"><?= $smsg ?></p>
             <p>Comics will be sent to your email every 5 minutes</p>
             <div class="form-control">
                 <label for="email">Email:</label>
                 <input type="email" required name="email" placeholder="apc@example.com" id="email">
             </div>
             <div id="buttons">
-                <button type="submit" formaction="mailjob.php" name="BtnSubscribe" id="BtnSubscribe" value="1">Subscribe</button>
-                <button type="submit" formaction="unsubscribe.php" name="BtnUnsubscribe" id="BtnUnsubscribe" value="0">Unsubscribe</button>
+                <button type="submit" formaction="subscribe.php" name="BtnSubscribe" id="BtnSubscribe" value="1">Subscribe</button>
+                <button type="submit" formaction="unsubscribe.php" name="BtnUnsubscribe" id="BtnUnsubscribe" value="1">Unsubscribe</button>
             </div>
         </form>
     </div>

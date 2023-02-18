@@ -1,6 +1,7 @@
 <?php
 session_start();
 include "connection.php";
+require "sendmail.php";
 
 $email = $_GET["email"];
 $subscribe =  isset($_GET['BtnSubscribe'])?$_GET['BtnSubscribe']:"";
@@ -13,13 +14,15 @@ function addSubscriptionDB($jobid){
     echo "sql1", $sql;
     $result = $conn->query($sql);
     if($result->num_rows){
-        $sql = sprintf("update subscription set is_active = 1 and jobid = %u where email = '%s'",$jobid,$email);
+        $sql = sprintf("update subscription set is_active = 1 , jobid = %u where email = '%s'",$jobid,$email);
         $conn->query($sql);
     }
     else{
         $sql = sprintf("insert into subscription(email,jobid,is_active) values('%s',%u,1)",$email,$jobid);
         $conn->query($sql);
     }
+    $_SESSION["successmessage"] = "Subscribed Successfully";
+    header("location:index.php");
 }
 
 function isSubscribed(){
@@ -27,7 +30,7 @@ function isSubscribed(){
     $sql = sprintf("select jobid from subscription where email = '%s' and is_active = 1",$email);
     $result = $conn->query($sql);
     if($result->num_rows){
-        $_SESSION["message"] = "You are Already Subscribed";
+        $_SESSION["errormessage"] = "You are Already Subscribed";
         header("location:index.php");  
     }
     
@@ -38,6 +41,7 @@ if ($subscribe){
     isSubscribed();
     $data = array(
         "job"=>array(
+            "title" => $email,
             "url" => "localhost/rtCamp-Assignment-Practice/mailjob.php?email=".$email,
             "enabled"=> true,
             'saveResponses' => true,
@@ -77,17 +81,12 @@ if ($subscribe){
     }
     else{
         $response = json_decode($response,true);
-        print_r($response);
         addSubscriptionDB($response["jobId"]);
-        echo"Job Created Successfully";
     }  
     curl_close($curl);
 }
 
-function sendmail(){
-    global $email;
-    $result = mail($email,"Comic Assignment Test","This is a message for comic assignment");
-    echo $result?"Sent Success": "Error";
-}
+// sendmail($email);
+
 
 ?>

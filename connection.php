@@ -2,7 +2,6 @@
 
 $conn = new mysqli("localhost","root","","rtcampdb");
 
-if($conn->error){
-    die($conn->error);
-}
+$conn->error ? die($conn->error) : "";
+
 ?>

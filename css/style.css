@@ -1,7 +1,7 @@
 body{
     background-color: black;
 }
-h2, label, p, button{
+h2, label, p{
     color :white;
     font-family: 'Montserrat', sans-serif
 }
@@ -15,7 +15,8 @@ input{
     margin:0 auto;
     margin-top: 10%;
     margin-bottom: 10%;
-    width: 25%;
+    max-width: 50vh;
+    max-height:50vh;
     border: 1px solid yellow;
     padding: 22px;
     border-radius: 22px;
@@ -27,19 +28,29 @@ h2{
 .form-control{
     margin-bottom: 10px;
 }
+#buttons{
+    display: flex;
+    max-width: fit-content;
+}
+
 #BtnSubscribe{
     color: white;
     background-color: red;
-    padding: 5px;
+    padding: 6px;
+    font-size: 15px;
+
 }
 #BtnUnsubscribe{
-    color: white;
+    color: black !important;
     background-color: grey;
-    padding: 5px;
+    padding: 6px;
+    font-size: 15px;
+
+    
 }
 #errormsg{
     color : red;
 }
-#buttons{
-    display: flex;
+#successmsg{
+    color : green   ;
 }
