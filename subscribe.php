@@ -1,17 +1,15 @@
 <?php
 session_start();
 include "connection.php";
-require "sendmail.php";
 
 $email = $_GET["email"];
 $subscribe =  isset($_GET['BtnSubscribe'])?$_GET['BtnSubscribe']:"";
 
-echo $email;
 
 function addSubscriptionDB($jobid){
     global $email,$conn;
     $sql= sprintf("select id from subscription where email = '%s' and is_active=0",$email);
-    echo "sql1", $sql;
+
     $result = $conn->query($sql);
     if($result->num_rows){
         $sql = sprintf("update subscription set is_active = 1 , jobid = %u where email = '%s'",$jobid,$email);
@@ -31,7 +29,8 @@ function isSubscribed(){
     $result = $conn->query($sql);
     if($result->num_rows){
         $_SESSION["errormessage"] = "You are Already Subscribed";
-        header("location:index.php");  
+        header("location:index.php"); 
+        exit(); 
     }
     
 }
@@ -42,14 +41,14 @@ if ($subscribe){
     $data = array(
         "job"=>array(
             "title" => $email,
-            "url" => "localhost/rtCamp-Assignment-Practice/mailjob.php?email=".$email,
+            "url" => $_SERVER["HTTP_HOST"]."/rtCamp-Assignment-Practice/sendmail.php?email=".$email,
             "enabled"=> true,
             'saveResponses' => true,
             "schedule"=>array(
                 "timezone"=>"Asia/Kolkata",
                 "hours"=>[-1],
                 "mdays"=>[-1],
-                "minutes"=>[5],
+                "minutes"=>range(0, 59, 5),
                 "months"=>[-1],
                 "wdays"=>[-1]
             )
@@ -61,11 +60,7 @@ if ($subscribe){
         "Authorization: Bearer Pn7R1+JePLlQqt/7Z/b4H1M/TXjxm9G/puNVNvQQ+Mk="
     );
 
-    print_r($headers);
-    echo "<pre>";
-    print_r($data);
-    echo "</pre>";
-
+    
     $curl = curl_init();
     curl_setopt($curl,CURLOPT_URL,'https://api.cron-job.org/jobs');
     curl_setopt($curl,CURLOPT_CUSTOMREQUEST,'PUT');
@@ -86,7 +81,6 @@ if ($subscribe){
     curl_close($curl);
 }
 
-// sendmail($email);
 
 
 ?>
