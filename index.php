@@ -12,7 +12,7 @@ unset($_SESSION["successmessage"]);
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Comic Bot</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -30,8 +30,8 @@ unset($_SESSION["successmessage"]);
                 <input type="email" required name="email" placeholder="apc@example.com" id="email">
             </div>
             <div id="buttons">
-                <button type="submit" formaction="subscribe.php" name="BtnSubscribe" id="BtnSubscribe" value="1">Subscribe</button>
-                <button type="submit" formaction="unsubscribe.php" name="BtnUnsubscribe" id="BtnUnsubscribe" value="1">Unsubscribe</button>
+                <button type="submit" formaction="<?= htmlspecialchars('subscribe.php') ?>" name="BtnSubscribe" id="BtnSubscribe" value="1">Subscribe</button>
+                <button type="submit" formaction="<?= htmlspecialchars('unsubscribe.php') ?>" name="BtnUnsubscribe" id="BtnUnsubscribe" value="1">Unsubscribe</button>
             </div>
         </form>
     </div>
