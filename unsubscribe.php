@@ -36,7 +36,7 @@ function deleteSubscriptionDB(){
 function deleteCronjob($jobid){
     $headers = array(
         "Content-Type: application/json",
-        "Authorization: Bearer Pn7R1+JePLlQqt/7Z/b4H1M/TXjxm9G/puNVNvQQ+Mk="
+        "Authorization: Bearer <Cron bearer token>"
     );
     
     $curl = curl_init();
