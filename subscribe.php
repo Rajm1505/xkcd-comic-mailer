@@ -57,7 +57,7 @@ function createCronjob($email){
          
         $headers = array(
             "Content-Type: application/json",
-            "Authorization: Bearer Pn7R1+JePLlQqt/7Z/b4H1M/TXjxm9G/puNVNvQQ+Mk="
+            "Authorization: Bearer <cron job bearer>"
         );
       
         $curl = curl_init();
